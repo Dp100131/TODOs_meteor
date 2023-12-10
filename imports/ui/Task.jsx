@@ -6,6 +6,7 @@ export const Task = ({ task, onCheckboxClick, onDeleteClick }) => (
             type="checkbox"
             checked={!!task.isChecked}
             onClick={() => onCheckboxClick(task)} 
+            readOnly
         />
         <span>{task.text}</span>
         <button onClick={() => onDeleteClick(task)}>&times;</button>

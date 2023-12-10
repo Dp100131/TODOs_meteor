@@ -19,13 +19,11 @@ export function TaskForm() {
     }
 
     const handleChange = (e) => {
-        setText(e.target.value);
-        console.log(text);
+        setText(e.target.value); 
     }
 
     return(
-        <div>
-            <h1>TODOs app</h1>
+        <div> 
             <form className="task-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
