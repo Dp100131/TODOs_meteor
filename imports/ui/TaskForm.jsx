@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TasksCollection } from "../api/TasksCollection";
 
-export function TaskForm() {
+export function TaskForm({ user }) {
 
     const [text, setText] = useState("");
 
@@ -12,7 +12,8 @@ export function TaskForm() {
 
         TasksCollection.insert({
             text: text.trim(),
-            createdAt: new Date()
+            createdAt: new Date(),
+            userId: user._id
         });
 
         setText("");
@@ -29,6 +30,7 @@ export function TaskForm() {
                     type="text"
                     placeholder="Type to add new task"
                     onChange={e => handleChange(e)}
+                    value={text}
                 />
                 <button type="submit">Add task</button>
             </form>
