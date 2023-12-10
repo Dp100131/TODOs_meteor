@@ -16,3 +16,12 @@ meteor add react-meteor-data
 ```
 { sort: { createdAt: -1 } }
 ```
+# Hacer un update:
+
+```
+TasksCollection.update(_id, {
+      $set:{
+        isChecked: !isChecked
+      }
+    })
+```
