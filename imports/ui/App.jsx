@@ -1,18 +1,21 @@
 import React from 'react'; 
+
+import { useTracker } from 'meteor/react-meteor-data';
+import { TasksCollection } from '../api/TasksCollection.js'; 
+
 import { Task } from './Task.jsx';
+import { TaskForm } from './TaskForm.jsx';
 
-const tasks = [
-  {_id: 1, text: 'First Task'},
-  {_id: 2, text: 'Second Task'},
-  {_id: 3, text: 'Third Task'},
-];
 
-export const App = () => (
-  <div>
-    <h1>Welcome to Meteor!</h1>
+export const App = () => {
+  const tasks = useTracker(() => TasksCollection.find({}, { sort: { createdAt: -1 } }).fetch());
 
-    <ul>
-      { tasks.map(task => <Task key={ task._id } task={ task }/>) }
-    </ul>
-  </div>
-);
+  return (
+    <div>  
+      <TaskForm />
+      <ul>
+        { tasks.map(task => <Task key={ task._id } task={ task }/>) }
+      </ul>
+    </div>
+  );
+};

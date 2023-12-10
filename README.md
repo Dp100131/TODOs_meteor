@@ -8,3 +8,11 @@ import { Mongo } from 'meteor/mongo';
 
 export const TasksCollection = new Mongo.Collection('tasks');
 ```
+# Para renderizar la colección (useTraker)
+```
+meteor add react-meteor-data
+```
+# Para mostrar las tareas más recientes se puede usar lo siguiente en .find()
+```
+{ sort: { createdAt: -1 } }
+```
