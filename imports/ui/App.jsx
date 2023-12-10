@@ -67,7 +67,7 @@ export const App = () => {
           <div className="app-header">
             <h1>
               📝️ To Do List
-              ({pendingTasksCount})
+              {user ? `(${pendingTasksCount})`: <Fragment/>}
             </h1>
           </div>
         </div>
@@ -76,7 +76,7 @@ export const App = () => {
         {user ? (
           <Fragment>
             <div className='user' onClick={logout}>
-              {user.username} 🚪
+            {user.username || user.profile.name} 🚪
             </div>
             <TaskForm user={user} />
             <div className='filter'>
@@ -87,10 +87,10 @@ export const App = () => {
             <ul className='tasks'>
               { tasks.map(task => 
                 <Task 
-                key={ task._id } 
-                task={ task }
-                onCheckboxClick={toggleChecked}
-                onDeleteClick={deleteTask}
+                  key={ task._id } 
+                  task={ task }
+                  onCheckboxClick={toggleChecked}
+                  onDeleteClick={deleteTask}
                 />
               ) }
             </ul>
