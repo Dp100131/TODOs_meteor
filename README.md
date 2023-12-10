@@ -25,3 +25,15 @@ TasksCollection.update(_id, {
       }
     })
 ```
+
+# Filtrar trae los que no cumplen:
+```
+const hideCompletedFilter = { isChecked: { $ne: true } };
+const tasks = useTracker(() => TasksCollection.find(hideCompleted ? hideCompletedFilter : {}, { sort: { createdAt: -1 } }).fetch());
+```
+# Me entrega los faltantes
+```
+const pendingTasksCount = useTracker(() =>
+    TasksCollection.find(hideCompletedFilter).count()
+); 
+```
