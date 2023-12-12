@@ -74,3 +74,21 @@ add service:
 ```
 meteor add service-configuration
 ```
+# Deshabilitar la edición de la base de datos desde el cliente:
+```
+meteor remove insecure
+```
+
+Usar metodos:
+```
+Meteor.call('task.insert', text);
+```
+
+# Con esto desactivamos el autopublish
+
+```
+meteor remove autopublish
+```
+
+Meteor.publish: permite publicar los datos desde el servidor al cliente;
+Meteor.subscribe: permite que el código del cliente solicite datos al cliente.

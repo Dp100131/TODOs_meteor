@@ -3,7 +3,7 @@ import React, { useState, Fragment } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 
-import { TasksCollection } from '../api/TasksCollection.js';  
+import { TasksCollection } from '../db/TasksCollection.js';  
 import { Task } from './Task.jsx';
 import { TaskForm } from './TaskForm.jsx';
 import { LoginForm } from './LoginForm.jsx';
@@ -47,18 +47,12 @@ export const App = () => {
     });
 
   const toggleChecked = ({ _id, isChecked}) => {
-    TasksCollection.update(_id, {
-      $set:{
-        isChecked: !isChecked
-      }
-    })
+    Meteor.call('tasks.setIsChecked', _id, !isChecked)
   }
 
-  const deleteTask = ({ _id }) => TasksCollection.remove(_id);
+  const deleteTask = ({ _id }) => Meteor.call('tasks.remove', _id);
 
-  const logout = () => Meteor.logout();
-
-  console.log(tasks);
+  const logout = () => Meteor.logout(); 
 
   return (
     <div className='app'>  
@@ -67,7 +61,7 @@ export const App = () => {
           <div className="app-header">
             <h1>
               📝️ To Do List
-              {user ? `(${pendingTasksCount})`: <Fragment/>}
+              {user ? ` [${pendingTasksCount}]`: <Fragment/>}
             </h1>
           </div>
         </div>
@@ -78,7 +72,7 @@ export const App = () => {
             <div className='user' onClick={logout}>
             {user.username || user.profile.name} 🚪
             </div>
-            <TaskForm user={user} />
+            <TaskForm />
             <div className='filter'>
               <button
                 onClick={() => setHideCompleted(!hideCompleted)}
