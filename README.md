@@ -88,6 +88,7 @@ Meteor.call('task.insert', text);
 
 ```
 meteor remove autopublish
+
 ```
 
 Meteor.publish: permite publicar los datos desde el servidor al cliente;
